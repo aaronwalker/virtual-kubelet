@@ -1,6 +1,7 @@
 package vkubelet
 
 import (
+	"github.com/virtual-kubelet/virtual-kubelet/providers/aws"
 	"github.com/virtual-kubelet/virtual-kubelet/providers/azure"
 	"github.com/virtual-kubelet/virtual-kubelet/providers/hypersh"
 	"k8s.io/api/core/v1"
@@ -9,6 +10,7 @@ import (
 // Compile time proof that our implementations meet the Provider interface.
 var _ Provider = (*azure.ACIProvider)(nil)
 var _ Provider = (*hypersh.HyperProvider)(nil)
+var _ Provider = (*aws.ECSProvider)(nil)
 
 // Provider contains the methods required to implement a virtual-kubelet provider.
 type Provider interface {

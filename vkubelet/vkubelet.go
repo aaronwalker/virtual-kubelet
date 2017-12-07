@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/virtual-kubelet/virtual-kubelet/manager"
+	"github.com/virtual-kubelet/virtual-kubelet/providers/aws"
 	"github.com/virtual-kubelet/virtual-kubelet/providers/azure"
 	"github.com/virtual-kubelet/virtual-kubelet/providers/hypersh"
 	corev1 "k8s.io/api/core/v1"
@@ -70,6 +71,11 @@ func New(nodeName, operatingSystem, namespace, kubeConfig, taint, provider, prov
 		}
 	case "hyper":
 		p, err = hypersh.NewHyperProvider(providerConfig, rm, nodeName, operatingSystem)
+		if err != nil {
+			return nil, err
+		}
+	case "awsecs":
+		p, err = aws.NewECSProvider(providerConfig, rm, nodeName, operatingSystem)
 		if err != nil {
 			return nil, err
 		}
