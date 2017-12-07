@@ -10,6 +10,7 @@ import (
 
 type providerConfig struct {
 	Region          string
+	Cluster					string
 	AccessKey       string
 	SecretKey       string
 	OperatingSystem string
@@ -26,6 +27,12 @@ func (p *ECSProvider) loadConfig(r io.Reader) error {
 	p.region = config.Region
 	p.accessKey = config.AccessKey
 	p.secretKey = config.SecretKey
+
+	// Default ecs cluser name
+	p.cluster = "default"
+	if config.Cluster != "" {
+		p.cluster = config.Cluster
+	}
 
 	// Default to 20 mcpu
 	p.cpu = "20"

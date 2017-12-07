@@ -20,6 +20,7 @@ type ECSProvider struct {
 	resourceManager *manager.ResourceManager
 	nodeName        string
 	operatingSystem string
+	cluster					string
 	region          string
 	accessKey       string
 	secretKey       string
